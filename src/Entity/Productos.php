@@ -57,6 +57,7 @@ class Productos
     private $title2;
 
     /**
+     * 
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date", nullable=false)
