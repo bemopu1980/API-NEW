@@ -79,14 +79,10 @@ class Productos
     private $createby;
 
     /**
-     * @var \Categoria
-     *
-     * @ORM\ManyToOne(targetEntity="Categoria")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=Categoria::class, inversedBy="productos")
      */
     private $categoria;
+
 
     public function getId(): ?int
     {
@@ -189,17 +185,18 @@ class Productos
         return $this;
     }
 
-    public function getCategoria(): ?Categoria
+    public function getCategoria(): ?categoria
     {
         return $this->categoria;
     }
 
-    public function setCategoria(?Categoria $categoria): self
+    public function setCategoria(?categoria $categoria): self
     {
         $this->categoria = $categoria;
 
         return $this;
     }
+
 
 
 }
