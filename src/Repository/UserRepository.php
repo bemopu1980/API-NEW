@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,10 +18,26 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, User::class);
+        $this->manager= $manager;
     }
+    public function saveUser($data)    
+
+    {
+         $newPet = new User();
+
+        $newPet
+                ->setId = ($id)
+                ->setUsername = ($username)
+                ->setRoles= ($roles)
+                ->setPassword = ($password);  
+
+        $this->manager->persist($newPet);
+        $this->manager->flush();
+
+    }  
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
@@ -34,6 +51,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+    public function updatePet(User $pet):User
+    
+    {
+        $this->manager>persist($pet);
+        $this->manager->flush();
+
+        return $pet;
+    } 
+
+    public function removePet(User $pet):User
+    
+    {
+        $this->manager->remove($pet);
+        $this->manager->flush();
+
+        return $pet;
     }
 
     // /**

@@ -24,14 +24,14 @@ class ProductosRepository extends ServiceEntityRepository
         $this->manager= $manager;
     }
 
-    public function saveProductos($data)
+    public function saveProductos($data)    
 
     {
-         $newPet = new Pet();
+         $newPet = new Productos();
 
         $newPet
                 ->setImg = ($img)
-                ->setmMensaje = ($mensaje)
+                ->setMensaje = ($mensaje)
                 ->setTitle = ($title)
                 ->setDescription = ($description)
                 ->setTitle2 = ($title2)
@@ -45,7 +45,7 @@ class ProductosRepository extends ServiceEntityRepository
 
     }  
 
-    public function updatePet(Pet $pet):Pet
+    public function updatePet(Productos $pet):Productos
     
     {
         $this->manager>persist($pet);
@@ -54,7 +54,7 @@ class ProductosRepository extends ServiceEntityRepository
         return $pet;
     } 
 
-    public function removePet(Pet $pet):Pet
+    public function removePet(Productos $pet):Productos
     
     {
         $this->manager->remove($pet);
@@ -63,12 +63,23 @@ class ProductosRepository extends ServiceEntityRepository
         return $pet;
     }
 
+     public function findProductos($categoria)
     
-} 
+    {
+        $query = $this->manager->createQuery('SELECT p 
+        FROM App\Entity\Productos p 
+        JOIN App\Entity\Categoria c
+        WHERE (p.categoria = c.id) 
+        AND (c.categoria = :categoria)');
+        $query->setParameter("categoria",$categoria);
+        $result = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        return $result; 
+    } 
+}
     // /**
     //  * @return Productos[] Returns an array of Productos objects
     //  */
-    /*
+    
   
 
 

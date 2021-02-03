@@ -48,7 +48,7 @@ class ProductosController extends AbstractController
 
     {
         $pet = $this->ProductosRepository->findOneBy(['id'=>$id]);
-            $data = [
+            $data[] = [
                 'id'=> $pet->getId(),
                 'img'=>$pet->getImg(),
                 'mensaje'=>$pet->getMensaje(),
@@ -76,8 +76,9 @@ class ProductosController extends AbstractController
                 'id'=> $pet->getId(),
                 'img'=>$pet->getImg(),
                 'mensaje'=>$pet->getMensaje(),
-                'description'=>$pet->getDescription(),
                 'title'=>$pet->getTitle(),
+                'description'=>$pet->getDescription(),
+                'title2'=>$pet->getTitle2(),
                 'date'=>$pet->getDate(),
                 'comments'=>$pet->getComments(),
                 'createby'=>$pet->getCreateby(),
@@ -92,19 +93,20 @@ class ProductosController extends AbstractController
      */
     public function update($id, Request $request): JsonResponse
     {
-        $pet = $this->petRepository->findOneBy(['id' => $id]);
+        $pet = $this->ProductosRepository->findOneBy(['id' => $id]);
         $data = json_decode($request->getContent(), true);
 
         empty($data['img']) ? true : $pet->setImg($data['img']);
         empty($data['mensaje']) ? true : $pet->setMensaje($data['mensaje']);
-        empty($data['description']) ? true : $pet->setDescription($data['description']);
         empty($data['title']) ? true : $pet->setTitle($data['title']);
+        empty($data['description']) ? true : $pet->setDescription($data['description']);
+        empty($data['title2']) ? true : $pet->setTitle2($data['title2']);
         empty($data['date']) ? true : $pet->setDate($data['date']);
         empty($data['comments']) ? true : $pet->setComments($data['comments']);
         empty($data['createby']) ? true : $pet->setCreateby($data['createby']);
         empty($data['categoria']) ? true : $pet->setCategoria($data['categoria']);
 
-        $updatedPet = $this->pProductosRepository->updatePet($pet);
+        $updatedPet = $this->ProductosRepository->updatePet($pet);
 
         return new JsonRespponse(['status' => 'Pet updated!'], Response::HTTP_OK);
     }
@@ -121,13 +123,19 @@ class ProductosController extends AbstractController
 
         return new JsonResponse(['status'=> 'Pet delete'], Response::HTTP_OK);
     }
-    
 
-  /*   public function index(): Response
+     /**
+     * @Route("/productos/categoria/{categoria}", name="filter_productos", methods={"GET"})
+     * 
+     */
+
+    public function getFilter($categoria):JsonResponse
+
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ProductosController.php',
-        ]);
-    } */
+        $categoria = $this->ProductosRepository-> findProductos($categoria);
+
+        echo json_encode(($categoria));
+
+        return new JsonResponse(['status'=> 'Categoria'], Response::HTTP_OK);
+    }
 }

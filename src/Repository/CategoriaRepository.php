@@ -33,7 +33,7 @@ class CategoriaRepository extends ServiceEntityRepository
 
     }  
 
-    public function updatePet(Pet $pet):Pet
+    public function updatePet(Categoria $pet):Categoria
     
     {
         $this->manager>persist($pet);
@@ -42,7 +42,7 @@ class CategoriaRepository extends ServiceEntityRepository
         return $pet;
     } 
 
-    public function removePet(Pet $pet):Pet
+    public function removePet(Categoria $pet):Categoria
     
     {
         $this->manager->remove($pet);
