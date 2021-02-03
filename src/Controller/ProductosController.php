@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Repository\ProductosRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -137,5 +138,31 @@ class ProductosController extends AbstractController
         echo json_encode(($categoria));
 
         return new JsonResponse(['status'=> 'Categoria'], Response::HTTP_OK);
+    }
+     /**
+     * @Route("/findProductos/", name="get_all_findProductos", methods={"GET"})
+     */
+    public function findProductos(): JsonResponse
+
+    {
+        $pets = $this->ProductosRepository->findProductos();
+        $data =[];
+
+        foreach ($pets as $pet) {
+            $data[] = [
+                'id'=> $pet->getId(),
+                'img'=>$pet->getImg(),
+                'mensaje'=>$pet->getMensaje(),
+                'title'=>$pet->getTitle(),
+                'description'=>$pet->getDescription(),
+                'title2'=>$pet->getTitle2(),
+                'date'=>$pet->getDate()->format('d-m-Y H:i:s'),
+                'comments'=>$pet->getComments(),
+                'createby'=>$pet->getCreateby(),
+                'categoria'=>$pet->getCategoria()->getCategoria(),
+            ];
+        }
+
+        return new JsonResponse($data, Response::HTTP_OK);
     }
 }

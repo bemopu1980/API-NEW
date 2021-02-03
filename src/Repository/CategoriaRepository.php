@@ -56,5 +56,5 @@ class CategoriaRepository extends ServiceEntityRepository
     // /**
     //  * @return Categoria[] Returns an array of Categoria objects
     //  */
-    /*
    
+    

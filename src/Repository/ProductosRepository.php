@@ -63,16 +63,14 @@ class ProductosRepository extends ServiceEntityRepository
         return $pet;
     }
 
-     public function findProductos($categoria)
+     public function findProductos():array
     
     {
-        $query = $this->manager->createQuery('SELECT p 
+        $em=$this->getEntityManager();
+        $query = $em->createQuery('SELECT p 
         FROM App\Entity\Productos p 
-        JOIN App\Entity\Categoria c
-        WHERE (p.categoria = c.id) 
-        AND (c.categoria = :categoria)');
-        $query->setParameter("categoria",$categoria);
-        $result = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        JOIN p.categoria c');
+        $result = $query->getResult();
         return $result; 
     } 
 }
