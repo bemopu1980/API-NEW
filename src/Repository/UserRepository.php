@@ -8,7 +8,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface; 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -29,10 +30,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
          $newPet = new User();
 
         $newPet
-                ->setId = ($id)
-                ->setUsername = ($username)
-                ->setRoles= ($roles)
-                ->setPassword = ($password);  
+                
+                ->setUsername($data['username'])
+                ->setPassword($data['password']);  
 
         $this->manager->persist($newPet);
         $this->manager->flush();

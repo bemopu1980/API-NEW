@@ -28,7 +28,8 @@ class UserController extends AbstractController
 
         $username = $data['username'];
         $password = $data['password'];
-       
+
+        $this ->UsersRepository->upgradePassword($data, $newEncodedPassword);
         $this ->UserRepository->saveUser($data);
         return new JsonResponse(['status'=>'Pet created'], Response::HTTP_CREATED);
 
