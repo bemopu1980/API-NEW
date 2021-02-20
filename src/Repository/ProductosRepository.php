@@ -27,40 +27,41 @@ class ProductosRepository extends ServiceEntityRepository
     public function saveProductos($data)    
 
     {
-         $newPet = new Productos();
+         $newProductos = new Productos();
 
-        $newPet
-                ->setImg = ($img)
-                ->setMensaje = ($mensaje)
-                ->setTitle = ($title)
-                ->setDescription = ($description)
-                ->setTitle2 = ($title2)
-                ->setDate = ($date)
-                ->setComments = ($comments)
-                ->setCreateby = ($createby)
-                ->setCategoria = ($categoria);  
+        $newProductos
+     
+                ->setImg($data['img'])
+                ->setMensaje($data['mensaje'])
+                ->setTitle($data['title'])
+                ->setDescription($data['description'])
+                ->setTitle2($data['title2'])
+                ->setDate($data['date'])
+                ->setComments($data['comments'])
+                ->setCreateby($data['createby'])
+                ->setCategoria($data['categoria']);  
 
-        $this->manager->persist($newPet);
+        $this->manager->persist($newProductos);
         $this->manager->flush();
 
     }  
 
-    public function updatePet(Productos $pet):Productos
+    public function updatePet(Productos $Productos):Productos
     
     {
-        $this->manager>persist($pet);
+        $this->manager>persist($Productos);
         $this->manager->flush();
 
-        return $pet;
+        return $Productos;
     } 
 
-    public function removePet(Productos $pet):Productos
+    public function removePet(Productos $Productos):Productos
     
     {
-        $this->manager->remove($pet);
+        $this->manager->remove($Productos);
         $this->manager->flush();
 
-        return $pet;
+        return $Productos;
     }
 
      public function findProductos():array

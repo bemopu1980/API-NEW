@@ -24,14 +24,14 @@ class ContactoRepository extends ServiceEntityRepository
     public function saveContacto($data)    
 
     {
-         $newPet = new Contacto();
+         $newContacto= new Contacto();
 
-        $newPet
-                ->setNombre = ($nombre)
-                ->setEmail = ($email)
-                ->setSubject= ($subject)
-                ->setMessage = ($message)
-                ->setDate = ($date);
+        $newContacto
+                ->setNombre($data['nombre'])
+                ->setEmail($data['email']) 
+                ->setSubject($data['subject'])
+                ->setMessage($data['message'])
+                ->setDate($data['date']);
                
 
         $this->manager->persist($newPet);

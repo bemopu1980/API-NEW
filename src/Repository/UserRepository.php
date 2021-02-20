@@ -27,14 +27,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function saveUser($data)    
 
     {
-         $newPet = new User();
+         $newUser = new User();
 
-        $newPet
+        $newUser
                 
                 ->setUsername($data['username'])
                 ->setPassword($data['password']);  
 
-        $this->manager->persist($newPet);
+        $this->manager->persist($newUser);
         $this->manager->flush();
 
     }  
@@ -52,22 +52,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
-    public function updatePet(User $pet):User
+    public function updatePet(User $User):User
     
     {
-        $this->manager>persist($pet);
+        $this->manager>persist($User);
         $this->manager->flush();
 
-        return $pet;
+        return $User;
     } 
 
-    public function removePet(User $pet):User
+    public function removePet(User $User):User
     
     {
-        $this->manager->remove($pet);
+        $this->manager->remove($User);
         $this->manager->flush();
 
-        return $pet;
+        return $User;
     }
 
     // /**

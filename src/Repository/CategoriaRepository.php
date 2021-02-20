@@ -23,32 +23,34 @@ class CategoriaRepository extends ServiceEntityRepository
     public function saveCategoria($data)
 
     {
-         $newPet = new Pet();
+         $newCategoria = new Categoria ();
+            $newCategoria
+                ->setCategoria($data['categoria']);
 
-        $newPet
-                ->setCategoria = ($categoria);  
+        
+          
 
-        $this->manager->persist($newPet);
+        $this->manager->persist($newCategoria);
         $this->manager->flush();
 
     }  
 
-    public function updatePet(Categoria $pet):Categoria
+    public function updatePet(Categoria $Categoria):Categoria
     
     {
-        $this->manager>persist($pet);
+        $this->manager>persist($Categoria);
         $this->manager->flush();
 
-        return $pet;
+        return $Categoria;
     } 
 
-    public function removePet(Categoria $pet):Categoria
+    public function removePet(Categoria $Categoria):Categoria
     
     {
-        $this->manager->remove($pet);
+        $this->manager->remove($Categoria);
         $this->manager->flush();
 
-        return $pet;
+        return $Categoria;
     }
 
     
